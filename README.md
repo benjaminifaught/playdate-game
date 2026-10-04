@@ -1,7 +1,8 @@
 # Playdate Starter
 
-A minimal Playdate game project written in Lua. The starter screen shows a counter
-that increases when you press **A**.
+A Playdate platformer prototype written in Lua. Race across the warehouse, collect
+the parcel, carry it to the shipping box, and turn the crank to tape it shut before
+time runs out.
 
 ## Requirements
 
@@ -21,6 +22,21 @@ make run
 
 `make run` builds the game and opens it in the Playdate Simulator. The compiled
 game is written to `build/PlaydateStarter.pdx`.
+
+## Controls
+
+- **Left / Right** — move
+- **A** — jump
+- **B** — pick up a parcel or place it in the box when nearby
+- **Crank** — tape a parcel into the box when standing beside it
+
+Each shift opens with a briefing card and has its own obstacle layout and moving
+forklift. Hitting a forklift or running out of time fails the shift; press **A**
+to restart it from the briefing.
+
+Levels span two or three horizontally scrolling screens. Jump onto the warehouse
+racks and raised walkways using the step platforms; the HUD shows your current
+screen number.
 
 In VS Code, use **Terminal → Run Task** and choose **Playdate: Build** or
 **Playdate: Build and Run**. The Lua extension is recommended for language
