@@ -1,0 +1,6 @@
+name=Playdate Starter
+author=Your Name
+description=A small Lua game starter for Playdate.
+bundleID=com.example.playdatestarter
+version=1.0
+buildNumber=1
