@@ -1,49 +1,71 @@
-# Playdate Starter
+# Fulfillment Frenzy
 
-A Playdate platformer prototype written in Lua. Race across the warehouse, collect
-the parcel, carry it to the shipping box, and turn the crank to tape it shut before
-time runs out.
+A fast-paced warehouse platformer prototype for Playdate, built with Lua and the
+Playdate SDK. Race through multi-screen warehouse shifts, climb shelves and raised
+walkways, collect a parcel, deliver it to the shipping box, and turn the crank to
+tape it shut before time runs out.
 
-## Requirements
+![Fulfillment Frenzy gameplay](assets/screenshots/gameplay.png)
 
-- Playdate SDK
-- macOS (the run target opens the Playdate Simulator)
-- GNU Make
+## How to play
 
-The Makefile uses `PLAYDATE_SDK_PATH` when set, otherwise it reads `SDKRoot` from
-`~/.Playdate/config`.
+- **Left / Right** — move through the warehouse
+- **A** — jump onto stairs, shelves, and raised walkways
+- **B** — pick up a parcel or place it in the shipping box when nearby
+- **Crank** — tape the box shut when standing beside it
+
+Each shift begins with a briefing card. Avoid moving forklifts and finish the
+shipment before the timer expires; either a forklift collision or timeout fails
+the shift. Press **A** to restart from its briefing.
+
+## Warehouse shifts
+
+There are three increasingly challenging layouts:
+
+1. **Receiving** — two screens of racks and forklift traffic
+2. **Aisle Jam** — two screens of blocked aisles and raised routes
+3. **Outbound Dock** — a three-screen warehouse with more obstacles and faster
+   forklifts
+
+The camera scrolls horizontally as you move. The HUD shows the current shift,
+screen, remaining time, and delivery objective. Shelves and raised floors can be
+jumped through from below and landed on from above.
 
 ## Build and run
 
+Requirements:
+
+- Playdate SDK
+- macOS and GNU Make (the run target opens Playdate Simulator)
+
+The Makefile locates the SDK using `PLAYDATE_SDK_PATH`, or falls back to the
+`SDKRoot` setting in `~/.Playdate/config`.
+
+Build the game bundle:
+
 ```sh
 make build
+```
+
+Build and open it in Playdate Simulator:
+
+```sh
 make run
 ```
 
-`make run` builds the game and opens it in the Playdate Simulator. The compiled
-game is written to `build/PlaydateStarter.pdx`.
+The compiled bundle is `build/PlaydateStarter.pdx`. To remove it:
 
-## Controls
+```sh
+make clean
+```
 
-- **Left / Right** — move
-- **A** — jump
-- **B** — pick up a parcel or place it in the box when nearby
-- **Crank** — tape a parcel into the box when standing beside it
+In VS Code, use **Terminal → Run Task** and select **Playdate: Build** or
+**Playdate: Build and Run**.
 
-Each shift opens with a briefing card and has its own obstacle layout and moving
-forklift. Hitting a forklift or running out of time fails the shift; press **A**
-to restart it from the briefing.
+## Project structure
 
-Levels span two or three horizontally scrolling screens. Jump onto the warehouse
-racks and raised walkways using the step platforms; the HUD shows your current
-screen number.
-
-In VS Code, use **Terminal → Run Task** and choose **Playdate: Build** or
-**Playdate: Build and Run**. The Lua extension is recommended for language
-support and diagnostics.
-
-## Project layout
-
-- `Source/main.lua` — game update loop and starter interaction
-- `Source/pdxinfo` — game metadata
-- `Makefile` — SDK-backed build, run, and clean targets
+- `Source/main.lua` — game states, camera, HUD, interactions, and level sprites
+- `Source/player.lua` — worker sprite, movement, jumping, and collisions
+- `Source/levels.lua` — shift layouts, platforms, stairs, and forklift paths
+- `Source/pdxinfo` — Playdate game metadata
+- `Makefile` — SDK-backed build, run, and clean commands
